@@ -1,0 +1,20 @@
+.square-button {
+    margin: 2px;
+    padding: 0px 5px;
+    color: white;
+    background-color: #233142;
+   
+    border: none;
+    cursor: pointer;
+    width: 90px;
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-radius 0.3s; /* Smooth transition for border radius */
+  }
+  
+.square-button:hover {
+    border: 2px solid #233142;
+    border-radius: 12px;
+  }
