@@ -62,7 +62,7 @@ return user ? user.friendList : console.log("user not found");
 
 useEffect(() => {
 if(users && users.length>0){
-setFriendList(getUserFriendList(users, "@yuktadandeva"));
+setFriendList(getUserFriendList(users, "@amit"));
 }
 }, [users]); 
 
