@@ -43,7 +43,7 @@ const getUsers = async () => {
 
 useEffect(() => {
   if (users && users.length > 0) {
-    const fetchedUser = getUser(users, "@yuktadandeva", "yukta");
+    const fetchedUser = getUser(users, "@amit", "amit");
     console.log("User is being fetched:", fetchedUser);
     setUser(fetchedUser);
   }
