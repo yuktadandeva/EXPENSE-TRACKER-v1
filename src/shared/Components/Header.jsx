@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({login,reset}) => {
   return (
     <header className="header">
       <div className="header-left">
@@ -18,6 +18,7 @@ const Header = () => {
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
+            {login?<button onClick={reset}>LOGOUT</button>:null}
           </ul>
       </div>
     </header>
