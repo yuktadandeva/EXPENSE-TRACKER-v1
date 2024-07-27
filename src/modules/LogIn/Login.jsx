@@ -10,6 +10,7 @@ const getPassword = (e)=>{
 }
 const getUsername = (e)=>{
     setUsername(e.target.value);
+    console.log(e.target.value)
 }
 
 const submitInfo = (e)=>{
@@ -47,10 +48,10 @@ const btn={
      <h1>Login</h1>
 
      <form action="#">
-        <label style={block} for="username">Username:</label>
-        <input onChange={getUsername} type="text" id="username" name="username" required/>
+        <label style={block} for="#username">Username:</label>
+        <input onChange={getUsername} type='text' id="username" name="username" required/>
         
-        <label style={block} for="password">Password:</label>
+        <label style={block} for="#password">Password:</label>
         <input onChange={getPassword} type="password" id="password" name="password" required/>
         
         <button style={btn} onClick={submitInfo} type="submit">LOGIN</button>

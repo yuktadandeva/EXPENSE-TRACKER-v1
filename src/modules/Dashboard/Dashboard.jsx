@@ -29,10 +29,21 @@ useEffect(()=>{
 },[])
 
 const onLogin =(data)=>{
+  // const username = data.userName;
+  // const password = data.passWord;
   const username = data.userName;
   const password = data.passWord;
-  getUser(users, username, password);
-  console.log(username);
+
+  console.log(username,password)
+
+  if (users && users.length > 0) {
+    const fetchedUser =  getUser(users, username, password);
+    console.log("User is being fetched:", fetchedUser);
+    setUser(fetchedUser);
+    setFriendList(getUserFriendList(users, username));
+    setLogin(true);
+  }
+
   }
 
 const getUsers = async () => {
@@ -48,14 +59,14 @@ const getUsers = async () => {
   }
 };
 
-useEffect(() => {
-  if (users && users.length > 0) {
-    // const fetchedUser = getUser(users, "@amit", "amit");
-    console.log("User is being fetched:", fetchedUser);
-    setUser(fetchedUser);
-  }
-    console.log(users);
-}, [users]);
+// useEffect(() => {
+//   if (users && users.length > 0) {
+//     // const fetchedUser = getUser(users, "@amit", "amit");
+//     console.log("User is being fetched:", fetchedUser);
+//     setUser(fetchedUser);
+//   }
+//     console.log(users);
+// }, [users]);
 
 const getUser = (users, userId, password) => {
   const userProfile = users.find((user) => user.userId === userId && user.password === password);
@@ -67,11 +78,11 @@ const user = users.find((user)=> user.userId == userId);
 return user ? user.friendList : console.log("user not found");
 }
 
-useEffect(() => {
-if(users && users.length>0){
-setFriendList(getUserFriendList(users, "@amit"));
-}
-}, [users]); 
+// useEffect(() => {
+// if(users && users.length>0){
+
+// }
+// }, [users]); 
 
 useEffect(() => {
 console.log(friendList);
