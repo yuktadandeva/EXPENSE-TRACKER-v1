@@ -5,6 +5,7 @@ import { Bill } from "./Bill/Bill"
 import { useState, useEffect } from "react"
 import { getApiCall } from "../../shared/Services/ApiClient"
 import { BillContext } from "./Bill/context/bill-context"
+import { Login } from "../LogIn/Login"
 
 export const Dashboard = () => {
 
@@ -16,17 +17,23 @@ const [friendGroup, setGroup] = useState([]);
 const [user, setUser] = useState(null);
 const [users, setUsers] = useState();
 const [errors, setErrors] = useState(null);
-
+const[login, setLogin]= useState(false);
 // const addInList = (friend)=>{
 //   const friendsClone = [...friendGroup];
 //       friendsClone.push(friend);
 //       setGroup(friendsClone);
-// }
+//}
 
 useEffect(()=>{
   getUsers();
 },[])
 
+const onLogin =(data)=>{
+  const username = data.userName;
+  const password = data.passWord;
+  getUser(users, username, password);
+  console.log(username);
+  }
 
 const getUsers = async () => {
   try {
@@ -43,7 +50,7 @@ const getUsers = async () => {
 
 useEffect(() => {
   if (users && users.length > 0) {
-    const fetchedUser = getUser(users, "@amit", "amit");
+    // const fetchedUser = getUser(users, "@amit", "amit");
     console.log("User is being fetched:", fetchedUser);
     setUser(fetchedUser);
   }
@@ -113,13 +120,14 @@ useEffect(() => {
 }, [share]);
 
 
-const font={fontFamily:"Mulish"}
+const font={fontFamily:"Mulish", height:"100vh"}
 const myStyle ={border:"1px solid grey"}
 const margin ={margin:"50px"}
 
 return (
     <div style={font}>
       <Header></Header>
+      { login?
     <div className="container" >
       {/* <BillContext.Provider value={{friends:friendGroup, addInList:addInList}}> */}
         <div className="row" style={margin}>
@@ -133,7 +141,7 @@ return (
             </div>
         </div>
         {/* </BillContext.Provider> */}
-    </div>
+    </div>:<Login onLogin={onLogin} ></Login>}
     <Footer></Footer>
     </div>
   )
