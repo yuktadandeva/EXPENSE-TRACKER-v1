@@ -59,8 +59,6 @@ const onLogin =async (data)=>{
   const userid = data.userid;
   const password = data.passWord;
 
-  console.log("user id entered is",userid,"password entered is", password )
-
   try{
     const response = await axios.post(import.meta.env.VITE_GETUSER_URL, {
       userId : userid,
@@ -69,7 +67,7 @@ const onLogin =async (data)=>{
 
     console.log(response.data);
 
-    if(response.statusText(OK)){
+    if(response.status==200){
      setUser(response.data.user);
      setFriendList(response.data.user.friendList);
      setLogin(true);
@@ -81,36 +79,7 @@ const onLogin =async (data)=>{
   }catch(error){
     console.log("error in fetching user")
   }
-
-  // console.log(username,password)
-
-  // if (users && users.length > 0) {
-  //   const fetchedUser =  getUser(users, username, password);
-  //   if(fetchedUser){
-  //     setLogin(true);
-  //   }
-  //   console.log("User is being fetched:", fetchedUser);
-  //   setUser(fetchedUser);
-  //   setFriendList(getUserFriendList(users, username));
-    
-  // }
 }
-
-const getUser = (users, userId, password) => {
-  const userProfile = users.find((user) => user.userId === userId && user.password === password);
-  return userProfile ? userProfile :notfound();
-};
-
-const notfound = ()=>{
-  alert("WRONG DETAILS OR USER NOT REGISTERED");
-  setLogin(false)
-}
-
-const getUserFriendList = (users,userId)=>{
-const user = users.find((user)=> user.userId == userId);
-return user ? user.friendList : console.log("user not found");
-}
-
 
 //search handle
 
