@@ -33,7 +33,7 @@ return (
     <div>
         <div className="flex" style={flex}>
         <div className="profile-pic" style={myStyle}>
-            <img style={img} src="https://th-i.thgim.com/public/incoming/90m4jh/article68100867.ece/alternates/FREE_1200/seedhe%20maut%20-%20photoshoot%202023%20-%20shot%20by%20kyabc-20%201.jpg" alt="" />
+            <img style={img} src={user.userImg} alt="" />
         </div>
         </div>
         <div className="user-info" style={textAlign}>

@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import Button from '../../shared/Widgets/Button'
 
 export const Login = ({onLogin}) => {
-const [username, setUsername]= useState();
+const [userId, setUserId]= useState();
 const [password, setPassword]= useState();
 
 const getPassword = (e)=>{
     setPassword(e.target.value);
 }
-const getUsername = (e)=>{
-    setUsername(e.target.value);
+const getUserId = (e)=>{
+    setUserId(e.target.value);
     console.log(e.target.value)
 }
 
 const submitInfo = (e)=>{
-    const userData = {userName: username , passWord :password}
+    const userData = {userid: userId , passWord :password}
     onLogin(userData);
 }
 
@@ -48,8 +48,8 @@ const btn={
      <h1>Login</h1>
 
      <form action="#">
-        <label style={block} for="#username">Username:</label>
-        <input onChange={getUsername} type='text' id="username" name="username" required/>
+        <label style={block} for="#username">UserId:</label>
+        <input onChange={getUserId} type='text' id="username" name="username" required/>
         
         <label style={block} for="#password">Password:</label>
         <input onChange={getPassword} type="password" id="password" name="password" required/>
