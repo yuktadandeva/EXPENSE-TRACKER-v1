@@ -20,13 +20,29 @@ const [users, setUsers] = useState();
 const[login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState(null);
 
-let regisInfo=[];
+const [regisInfo, setRegisInfo] = useState({});
+// let regisInfo={};
+const addInfo = (data)=>{
+ setRegisInfo(data);
+ registerUser(regisInfo)
+}
+
+const registerUser = async (info)=>{
+ try{
+  const response = await axios.post(import.meta.env.VITE_ADDUSER_URL,{
+    info
+  })
+  console.log(response);
+ }catch(err){
+  console.log("error in registering ", err)
+ }
+}
 
 // const addInList = (friend)=>{
 //   const friendsClone = [...friendGroup];
 //       friendsClone.push(friend);
 //       setGroup(friendsClone);
-//}
+// }
 
 //handles login
 const reset = ()=>{
@@ -133,7 +149,7 @@ return (
 
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} add={addInFriendlist} login={login}></Header>
 
-    <regisContext.Provider value={{regisInfo:regisInfo}}>
+    <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
     {login?
 
     <div className="container" >
