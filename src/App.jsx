@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { Dashboard } from "./modules/Dashboard/Dashboard";
 
 
 const App = () => {
+  
   return (
-    <Dashboard></Dashboard>
+
+  <Dashboard></Dashboard>
+    
   )
 }
 

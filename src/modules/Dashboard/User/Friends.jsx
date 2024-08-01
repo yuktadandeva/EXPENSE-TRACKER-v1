@@ -15,7 +15,7 @@ export const Friends = ({userFriendList,add}) => {
           <h3 style={heading}>Add Friend</h3>
         </div>
     <div className='row'>
-    {userFriendList.map((friend,key)=> <AddFriend friend={friend} key={friend.id} add={add}></AddFriend>)}
+    {userFriendList.map((friend,key)=> <AddFriend friend={friend} key={friend.userId} add={add}></AddFriend>)}
     </div>
     </div>
   )

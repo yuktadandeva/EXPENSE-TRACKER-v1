@@ -44,7 +44,7 @@ return (
          <BillForm billHandled={billHandled} splitBill={splitBill} activityHandled={activityHandled}></BillForm>
         </div>
         <div className="add-friend">
-          <Friends userFriendList={userFriendList} add={add}></Friends>
+          <Friends userFriendList={user.friendList} add={add}></Friends>
         </div>
     </div>
   )

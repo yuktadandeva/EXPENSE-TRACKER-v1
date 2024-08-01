@@ -40,9 +40,21 @@ export const AddFriend = ({friend,add}) => {
       color:"black",
       width:"150px"
     }
+
+    const imgDiv ={
+      width:"20px",
+      overflow:"hidden"
+    }
+    const img={
+      width:"100%",
+      height:"100%"
+    }
   return (
     <div style={myStyle}>
-      <p style={name}>{friend.name} &nbsp;</p>|<p style={username}>&nbsp;{friend.id}</p> 
+      <div className="img">
+      <img src={friend.userImg} style={img} alt="" />
+      </div>
+      <p style={name}>{friend.name} &nbsp;</p>|<p style={username}>&nbsp;{friend.userId}</p> 
       <button style={squareButton} id={friend.id} onClick={add}>+</button>
     </div>
   )

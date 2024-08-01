@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import Button from '../../shared/Widgets/Button'
+import { Registration } from '../Registration/Registration';
+
 
 export const Login = ({onLogin}) => {
 const [userId, setUserId]= useState();
 const [password, setPassword]= useState();
+const [registration, setRegistration] = useState(false);
 
 const getPassword = (e)=>{
     setPassword(e.target.value);
@@ -13,11 +15,14 @@ const getUserId = (e)=>{
     console.log(e.target.value)
 }
 
-const submitInfo = (e)=>{
+const submitInfo =(e)=>{
     const userData = {userid: userId , passWord :password}
     onLogin(userData);
 }
 
+const toggleRegistration =(e)=>{
+    setRegistration(false);
+}
 
 const myStyle={
     border:"1px solid grey",
@@ -41,9 +46,15 @@ const btn={
     width:"150px"
 }
 
+const atag={
+    color:"black",
+    textDecoration:"underline"
+}
+
 
   return (
     <div style={myStyle}>
+        {!registration?
     <div className="inner-login">
      <h1>Login</h1>
 
@@ -55,8 +66,13 @@ const btn={
         <input onChange={getPassword} type="password" id="password" name="password" required/>
         
         <button style={btn} onClick={submitInfo} type="submit">LOGIN</button>
+       
     </form>
+
+   <button onClick={(e)=>{setRegistration(true)}}>OR register</button>
+        
      </div>
+     :<Registration toggleRegistration={toggleRegistration}/>}
     </div>
   )
 }

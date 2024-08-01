@@ -3,8 +3,7 @@ import Footer from "../../shared/Components/Footer"
 import { Profile } from "./User/Profile"
 import { Bill } from "./Bill/Bill"
 import { useState, useEffect } from "react"
-
-import { BillContext } from "./Bill/context/bill-context"
+import { regisContext } from "./context/registration-context.js"
 import { Login } from "../LogIn/Login"
 import axios from "axios"
 
@@ -17,37 +16,17 @@ const [friendList , setFriendList]= useState([]);
 const [friendGroup, setGroup] = useState([]);
 const [user, setUser] = useState(null);
 const [users, setUsers] = useState();
-const [errors, setErrors] = useState(null);
+
 const[login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState(null);
 
-const [username, setUsername]= useState();
-const [password, setPassword]= useState();
+let regisInfo=[];
 
 // const addInList = (friend)=>{
 //   const friendsClone = [...friendGroup];
 //       friendsClone.push(friend);
 //       setGroup(friendsClone);
 //}
-
-//on loading website getting users do this from backend
-// useEffect(()=>{
-//   getUsers();
-// },[])
-
-// const getUsers = async () => {
-//   try {
-//     const USERS_ENDPOINT = import.meta.env.VITE_USERS_URL;
-//     const usersData = await getApiCall(USERS_ENDPOINT);
-//     console.log("Users are being fetched:", usersData);
-//     setUsers(usersData); 
-
-//   } catch (err) {
-//     setErrors(err);
-//     console.log("Error fetching users:", err);
-//   }
-// };
-
 
 //handles login
 const reset = ()=>{
@@ -71,13 +50,16 @@ const onLogin =async (data)=>{
      setUser(response.data.user);
      setFriendList(response.data.user.friendList);
      setLogin(true);
+     return true;
     }
     else{
      console.log("login failed");
      setLogin(false);
+     return false;
     }
   }catch(error){
-    console.log("error in fetching user")
+    console.log("error in fetching user");
+    return false
   }
 }
 
@@ -140,7 +122,6 @@ const calculateShare=()=>{
   setShare(parseFloat(totalBill/friendGroup.length).toFixed(2));
 }
 
-
 // styling css
 
 const font={fontFamily:"Mulish", height:"100vh"}
@@ -149,10 +130,14 @@ const margin ={margin:"50px"}
 
 return (
     <div style={font}>
-      <Header reset={reset} searchUser={searchUser} foundUser={foundUser} add={addInFriendlist} login={login}></Header>
-      { login?
+
+    <Header reset={reset} searchUser={searchUser} foundUser={foundUser} add={addInFriendlist} login={login}></Header>
+
+    <regisContext.Provider value={{regisInfo:regisInfo}}>
+    {login?
+
     <div className="container" >
-      {/* <BillContext.Provider value={{friends:friendGroup, addInList:addInList}}> */}
+      
         <div className="row" style={margin}>
             <div className="col-8" >
                 <div className="totalMoney">
@@ -160,11 +145,12 @@ return (
                 </div>
             </div>
             <div className="col-4" style={myStyle}>
-                {user?<Profile user={user} billHandled={handleBill} splitBill={handleClick} activityHandled={handleActivity} userFriendList={friendList} user={user} add={handleAdd} ></Profile>:<p>Loading</p>}
+                {user?<Profile user={user} billHandled={handleBill} splitBill={handleClick} activityHandled={handleActivity} userFriendList={friendList} add={handleAdd} ></Profile>:<p>Loading</p>}
             </div>
         </div>
-        {/* </BillContext.Provider> */}
-    </div>:<Login onLogin={onLogin} ></Login>}
+     
+    </div>: <Login onLogin={onLogin}/>}
+    </regisContext.Provider>
     <Footer></Footer>
     </div>
   )
