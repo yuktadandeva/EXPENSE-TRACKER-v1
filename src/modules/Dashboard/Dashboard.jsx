@@ -15,13 +15,10 @@ const [activity, setActivity] = useState();
 const [friendList , setFriendList]= useState([]);
 const [friendGroup, setGroup] = useState([]);
 const [user, setUser] = useState(null);
-const [users, setUsers] = useState();
-
 const[login, setLogin]= useState(false);
-const [foundUser, setFoundUser] = useState(null);
-
+const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
-// let regisInfo={};
+
 const addInfo = (data)=>{
  setRegisInfo(data);
  registerUser(regisInfo)
@@ -82,20 +79,43 @@ const onLogin =async (data)=>{
 //search handle
 
 
-const searchUser=(userName)=>{
-  if(users){
-    console.log(userName)
-const foundUser = users.find((user)=>user.name==userName);
-setFoundUser(foundUser)
-console.log(foundUser);
-}}
-
-const addInFriendlist = (foundUser)=>{
-  console.log("function called in dashboard to add friend")
-user.friendList.push(foundUser);
-console.log("user added",user.friendList)
+const searchUser= async(userName)=>{
+ try{
+ 
+ const response = await axios.get(import.meta.env.VITE_VIEWUSER_URL,{
+  params:{
+    name:userName
+  }
+ })
+setFoundUser(response.data.user);
+console.log("founduser is ", foundUser);
+ }catch(error){
+ console.log("user not found", error)
+ }
 
 }
+useEffect(()=>{
+
+},[foundUser])
+
+
+const addInFriendlist =async (friendId)=>{
+console.log("function called in dashboard to add friend")
+
+try{
+const response = await axios.post(import.meta.env.VITE_ADDFRIEND_URL,{
+  userId: user.userId,
+  friendId: friendId
+})
+setFriendList(user.friendList)
+}catch(error){
+console.log("error in adding", error)
+}
+
+}
+useEffect(()=>{
+
+},[friendList])
 
 
 
@@ -147,7 +167,7 @@ const margin ={margin:"50px"}
 return (
     <div style={font}>
 
-    <Header reset={reset} searchUser={searchUser} foundUser={foundUser} add={addInFriendlist} login={login}></Header>
+    <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
     {login?

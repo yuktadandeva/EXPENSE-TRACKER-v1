@@ -16,8 +16,9 @@ const myStyle ={width:"40px"}
   }
 
   const sendtoAdd=()=>{
-  add({foundUser});
-  console.log("sent founduser from header")
+    const friendId = foundUser.userId;
+  add(friendId);
+
   }
 
   return (
