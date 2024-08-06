@@ -55,7 +55,7 @@ export const AddFriend = ({friend,add}) => {
       <img src={friend.userImg} style={img} alt="" />
       </div>
       <p style={name}>{friend.name} &nbsp;</p>|<p style={username}>&nbsp;{friend.userId}</p> 
-      <button style={squareButton} id={friend.id} onClick={add}>+</button>
+      <button style={squareButton} id={friend.userId} onClick={add}>+</button>
     </div>
   )
 }

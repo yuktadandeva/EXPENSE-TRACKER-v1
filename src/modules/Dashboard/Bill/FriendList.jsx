@@ -15,8 +15,8 @@ const Context = useContext(BillContext);
   return (
     <div>
         <div className="row" style={border}>
-          
-          {friendGroup.map((friend,key)=><Friend key={friend.id} friend={friend} share={share} />)}
+{/*           
+          {friendGroup.map((friend,key)=><Friend key={friend.id} friend={friend} share={share} />)} */}
        
         </div>
     </div>

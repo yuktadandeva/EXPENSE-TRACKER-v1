@@ -4,20 +4,26 @@ import { Profile } from "./User/Profile"
 import { Bill } from "./Bill/Bill"
 import { useState, useEffect } from "react"
 import { regisContext } from "./context/registration-context.js"
+import { BillContext } from "./Bill/context/bill-context.js"
 import { Login } from "../LogIn/Login"
 import axios from "axios"
 
 export const Dashboard = () => {
 
 const [totalBill, setBill] = useState();
-const [share, setShare] = useState();
+// const [share, setShare] = useState();
 const [activity, setActivity] = useState();
 const [friendList , setFriendList]= useState([]);
-const [friendGroup, setGroup] = useState([]);
+// const [friendGroup, setGroup] = useState([]);
 const [user, setUser] = useState(null);
-const[login, setLogin]= useState(false);
+const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
+
+let billActivity, billAmount, friendGroup, share;
+const addBill = ()=>{
+console.log("add bill in dashboard")
+}
 
 const addInfo = (data)=>{
  setRegisInfo(data);
@@ -35,11 +41,11 @@ const registerUser = async (info)=>{
  }
 }
 
-// const addInList = (friend)=>{
-//   const friendsClone = [...friendGroup];
-//       friendsClone.push(friend);
-//       setGroup(friendsClone);
-// }
+const addInList = (friend)=>{
+  const friendsClone = [...friendGroup];
+      friendsClone.push(friend);
+      setGroup(friendsClone);
+}
 
 //handles login
 const reset = ()=>{
@@ -94,11 +100,6 @@ console.log("founduser is ", foundUser);
  }
 
 }
-useEffect(()=>{
-
-},[foundUser])
-
-
 const addInFriendlist =async (friendId)=>{
 console.log("function called in dashboard to add friend")
 
@@ -107,29 +108,24 @@ const response = await axios.post(import.meta.env.VITE_ADDFRIEND_URL,{
   userId: user.userId,
   friendId: friendId
 })
-setFriendList(user.friendList)
+
 }catch(error){
 console.log("error in adding", error)
 }
 
 }
-useEffect(()=>{
-
-},[friendList])
-
-
 
 //bill 
 const findingFriend= (userId)=>{
   const friend = friendList.find((friend)=> friend.id == userId);
   console.log('friend', friend)
   return friend;
-}
+} 
 
-useEffect(() => {
-  console.log("Friends in Group:", friendGroup);
-  console.log("total friends", friendGroup.length);
-}, [friendGroup]);
+// useEffect(() => {
+//   console.log("Friends in Group:", friendGroup);
+//   console.log("total friends", friendGroup.length);
+// }, [friendGroup]);
 
 const handleAdd =(e)=>{
   const userId = e.target.id; 
@@ -170,6 +166,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
+      <BillContext.Provider value={{billAmount:billAmount, billActivity:billActivity, share:share}}>
     {login?
 
     <div className="container" >
@@ -177,15 +174,16 @@ return (
         <div className="row" style={margin}>
             <div className="col-8" >
                 <div className="totalMoney">
-                 <Bill bill={totalBill} activity={activity} share={share} friendGroup={friendGroup}></Bill>
+                 <Bill></Bill>
                 </div>
             </div>
             <div className="col-4" style={myStyle}>
-                {user?<Profile user={user} billHandled={handleBill} splitBill={handleClick} activityHandled={handleActivity} userFriendList={friendList} add={handleAdd} ></Profile>:<p>Loading</p>}
+                {user?<Profile user={user}></Profile>:<p>Loading</p>}
             </div>
         </div>
      
     </div>: <Login onLogin={onLogin}/>}
+    </BillContext.Provider>
     </regisContext.Provider>
     <Footer></Footer>
     </div>
