@@ -1,7 +1,30 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Input } from '../../../shared/Widgets/Input'
 import Button from '../../../shared/Widgets/Button'
-export const BillForm = ({billHandled,splitBill,activityHandled}) => {
+import { BillContext } from '../context/bill-context';
+
+export const BillForm = () => {
+const [amount , setAmount] = useState();
+const [activity , setActivity] = useState();
+
+const context = useContext(BillContext);
+
+const billHandled = (e)=>{
+console.log(e.target.value)
+setAmount(e.target.value);
+}
+
+const activityHandled = (e)=>{
+console.log(e.target.value)
+setActivity(e.target.value);
+}
+
+const addBill = ()=>{
+  const bill = {billAmount:amount , billActivity: activity}
+  console.log("bill form inside", bill)
+  context.addBill(bill);
+}
+
     const beauty={
       margin:"2px",
       padding:"0px 5px",
@@ -16,7 +39,7 @@ export const BillForm = ({billHandled,splitBill,activityHandled}) => {
     const pad={
       padding:"20px 15px",
     }
-    const ipmargin={
+    const IPmargin={
       margin:"2px"
     } 
     
@@ -27,11 +50,11 @@ export const BillForm = ({billHandled,splitBill,activityHandled}) => {
       </div>
       <div style={pad}>
        <label htmlFor="" style={beauty}>TOTAL BILL </label>
-        <Input fn={billHandled} style={ipmargin} val="Enter Amount"></Input><br></br>
+        <Input fn={billHandled} style={IPmargin} val="Enter Amount"></Input><br></br>
         <label htmlFor="" style={beauty}>ACTIVITY</label>
-        <Input fn={activityHandled} style={ipmargin}></Input><br>
+        <Input fn={activityHandled} style={IPmargin}></Input><br>
         </br>
-        <Button val="Split Bill" fn={splitBill} ></Button>
+        <Button val="ADD BILL" fn={addBill} ></Button>
         </div>
     </div>
     

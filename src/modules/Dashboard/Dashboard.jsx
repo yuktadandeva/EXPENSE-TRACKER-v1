@@ -20,9 +20,10 @@ const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 
-let billActivity, billAmount, friendGroup, share;
-const addBill = ()=>{
-console.log("add bill in dashboard")
+let bill;
+const addBill = (bill)=>{
+console.log("add bill in dashboard", bill);
+
 }
 
 const addInfo = (data)=>{
@@ -87,7 +88,6 @@ const onLogin =async (data)=>{
 
 const searchUser= async(userName)=>{
  try{
- 
  const response = await axios.get(import.meta.env.VITE_VIEWUSER_URL,{
   params:{
     name:userName
@@ -166,7 +166,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
-      <BillContext.Provider value={{billAmount:billAmount, billActivity:billActivity, share:share}}>
+    <BillContext.Provider value={{bill:bill,addBill:addBill}}>
     {login?
 
     <div className="container" >
@@ -183,8 +183,10 @@ return (
         </div>
      
     </div>: <Login onLogin={onLogin}/>}
+
     </BillContext.Provider>
     </regisContext.Provider>
+
     <Footer></Footer>
     </div>
   )
