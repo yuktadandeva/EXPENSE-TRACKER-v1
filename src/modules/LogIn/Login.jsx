@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Registration } from '../Registration/Registration';
 
 
-export const Login = ({onLogin}) => {
+export const Login = ({onLogin,rStatus}) => {
 const [userId, setUserId]= useState();
 const [password, setPassword]= useState();
 const [registration, setRegistration] = useState(false);
@@ -72,7 +72,7 @@ const atag={
    <button onClick={(e)=>{setRegistration(true)}}>OR register</button>
         
      </div>
-     :<Registration toggleRegistration={toggleRegistration}/>}
+     :<Registration toggleRegistration={toggleRegistration} rStatus={rStatus}/>}
     </div>
   )
 }

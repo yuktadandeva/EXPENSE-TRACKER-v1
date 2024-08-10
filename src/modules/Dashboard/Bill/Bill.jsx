@@ -1,8 +1,10 @@
 import React,{useContext} from 'react'
 import { BillContext } from './context/bill-context'
 import { FriendList } from './FriendList'
+import Button from '../../../shared/Widgets/Button'
 
 export const Bill = ({bill,activity,share, friendGroup}) => {
+const context = useContext(BillContext);
 
 const myStyle={
     height:"30vh", 
@@ -28,6 +30,7 @@ const cen={textAlign:"center",fontSize:"0.8em", paddingTop:"10px"}
     <h3>Description:&nbsp;{activity}</h3>
     </div>
     </div>
+    <Button val="share"></Button>
     <div className="friend-list">
     <div className="friends">
       <FriendList share={share} friendGroup={friendGroup}></FriendList>

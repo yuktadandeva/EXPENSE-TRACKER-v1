@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './Header.css';
+import Button from '../Widgets/Button';
 
 const Header = ({login,reset,searchUser,foundUser,add}) => {
 const [username, setUsername] = useState(null);
 
-const myStyle ={width:"40px"}
+const myStyle ={width:"100%",position:"absolute", height:"100%", left:"0"}
 
   const getSearchInput = (e)=>{
     console.log(e.target.value)
@@ -21,6 +22,8 @@ const myStyle ={width:"40px"}
 
   }
 
+  const circleIcon={border:"1px solid black", borderRadius:"50%", overflow:"hidden", position:"relative", width:"40px"}
+  const display={display:"flex"}
   return (
     <header className="header">
       <div className="header-left">
@@ -30,16 +33,20 @@ const myStyle ={width:"40px"}
      
       {login?
       <div className="header-center">
+        <div style={display}>
         <input onChange={getSearchInput} type="text" className="search-bar" placeholder="Search..." />
-        <button onClick={search}>Search</button> 
+        < Button fn={search} val={"Search"}></Button> 
+        </div>
         <div className="dropdown">
         {foundUser?
-        <div>
+        <div style={display}>
+        <div style={circleIcon}>
         <img src={foundUser.userImg} style={myStyle}/>
-        {foundUser.name}
-        <button onClick={sendtoAdd}>add</button>
         </div>
-        
+        {foundUser.name}
+        <Button fn={sendtoAdd} val={"+"}></Button>
+        </div>
+      
         :<p>no results</p>}
         </div>
         </div>
@@ -52,7 +59,7 @@ const myStyle ={width:"40px"}
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#contact">Contact</a></li>
-            {login?<button onClick={reset}>LOGOUT</button>:null}
+            {login?<Button fn={reset} val={"LOGOUT"}></Button>:null}
           </ul>
       </div>
     </header>

@@ -11,19 +11,15 @@ import axios from "axios"
 export const Dashboard = () => {
 
 const [totalBill, setBill] = useState();
-// const [share, setShare] = useState();
-const [activity, setActivity] = useState();
 const [friendList , setFriendList]= useState([]);
-// const [friendGroup, setGroup] = useState([]);
 const [user, setUser] = useState(null);
 const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
-
+const [rStatus, setStatus] = useState(false);
 let bill;
 const addBill = (bill)=>{
 console.log("add bill in dashboard", bill);
-
 }
 
 const addInfo = (data)=>{
@@ -36,9 +32,14 @@ const registerUser = async (info)=>{
   const response = await axios.post(import.meta.env.VITE_ADDUSER_URL,{
     info
   })
-  console.log(response);
+  if(response.status==200){
+    alert("successfully registered go back and login");
+    setStatus(true);
+  }else{
+    alert("some error user id should be unique")
+  }
  }catch(err){
-  console.log("error in registering ", err)
+  alert("error in registering ", err)
  }
 }
 
@@ -73,7 +74,7 @@ const onLogin =async (data)=>{
      return true;
     }
     else{
-     console.log("login failed");
+     alert("login failed");
      setLogin(false);
      return false;
     }
@@ -84,7 +85,6 @@ const onLogin =async (data)=>{
 }
 
 //search handle
-
 
 const searchUser= async(userName)=>{
  try{
@@ -108,6 +108,12 @@ const response = await axios.post(import.meta.env.VITE_ADDFRIEND_URL,{
   userId: user.userId,
   friendId: friendId
 })
+if(response.status==200){
+  alert("friend added!");
+
+}else{
+  alert("error in adding friend try again!")
+}
 
 }catch(error){
 console.log("error in adding", error)
@@ -167,9 +173,8 @@ return (
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
     <BillContext.Provider value={{bill:bill,addBill:addBill}}>
-    {login?
-
-    <div className="container" >
+    
+    {login?<div className="container" >
       
         <div className="row" style={margin}>
             <div className="col-8" >
@@ -178,11 +183,11 @@ return (
                 </div>
             </div>
             <div className="col-4" style={myStyle}>
-                {user?<Profile user={user}></Profile>:<p>Loading</p>}
+                {user?<Profile user={user} friendList={friendList}></Profile>:<p>Loading</p>}
             </div>
         </div>
      
-    </div>: <Login onLogin={onLogin}/>}
+    </div>: <Login onLogin={onLogin} rStatus={rStatus}/>}
 
     </BillContext.Provider>
     </regisContext.Provider>
