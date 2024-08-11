@@ -93,32 +93,45 @@ const searchUser= async(userName)=>{
     name:userName
   }
  })
-setFoundUser(response.data.user);
-console.log("founduser is ", foundUser);
+ if(response.status==200){
+  setFoundUser(response.data.user);
+  console.log("founduser is ", foundUser);
+ }else{
+alert("not found");
+ }
  }catch(error){
  console.log("user not found", error)
  }
 
 }
-const addInFriendlist =async (friendId)=>{
-console.log("function called in dashboard to add friend")
-
+const addInFriendlist = async (friendId)=>{
 try{
 const response = await axios.post(import.meta.env.VITE_ADDFRIEND_URL,{
   userId: user.userId,
   friendId: friendId
 })
 if(response.status==200){
-  alert("friend added!");
-
-}else{
-  alert("error in adding friend try again!")
+  fetchUpdatedFriendlist();
 }
-
 }catch(error){
-console.log("error in adding", error)
+  alert("error in adding friends")
+}
 }
 
+const fetchUpdatedFriendlist =async ()=>{
+  try{
+    const response = await axios.get(import.meta.env.VITE_GETFRIENDLIST_URL,{
+     params:{
+       name:user.name
+     }
+    })
+    if(response.status==200){
+      setFriendList();
+      setFriendList(response.data.user[0].friendList);
+    }
+    }catch(error){
+    console.log("updated friend list not fetched")
+    }
 }
 
 //bill 
