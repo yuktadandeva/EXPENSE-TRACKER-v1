@@ -41,7 +41,7 @@ return (
           <h6><i>{user.userId}</i></h6>
         </div>
         <div className="add-bill row">
-         <BillForm billHandled={billHandled} splitBill={splitBill} activityHandled={activityHandled}></BillForm>
+         <BillForm billHandled={billHandled} splitBill={splitBill} activityHandled={activityHandled} userId={user._id}></BillForm>
         </div>
         <div className="add-friend">
           <Friends userFriendList={friendList} add={add}></Friends>

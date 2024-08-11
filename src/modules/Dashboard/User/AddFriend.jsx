@@ -1,5 +1,6 @@
 import React,{useContext} from 'react'
 import { BillContext } from '../Bill/context/bill-context'
+import Button from '../../../shared/Widgets/Button';
 
 export const AddFriend = ({friend,add}) => {
 
@@ -55,7 +56,7 @@ export const AddFriend = ({friend,add}) => {
       <img src={friend.userImg} style={img} alt="" />
       </div>
       <p style={name}>{friend.name} &nbsp;</p>|<p style={username}>&nbsp;{friend.userId}</p> 
-      <button style={squareButton} id={friend.userId} onClick={add}>+</button>
+      <Button id={friend.userId} fn={addInList} val={'+'}></Button>
     </div>
   )
 }

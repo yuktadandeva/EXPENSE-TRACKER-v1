@@ -13,6 +13,7 @@ export const Friends = ({userFriendList,add}) => {
     <div>
         <div>
           <h3 style={heading}>Add Friend</h3>
+          <i>your friend list</i>
         </div>
     <div className='row'>
     {userFriendList.map((friend,key)=> <AddFriend friend={friend} key={friend.userId} add={add}></AddFriend>)}

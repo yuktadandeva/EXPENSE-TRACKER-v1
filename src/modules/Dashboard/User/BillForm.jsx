@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { Input } from '../../../shared/Widgets/Input'
 import Button from '../../../shared/Widgets/Button'
-import { BillContext } from '../context/bill-context';
+import { BillContext } from '../Bill/context/bill-context';
 import axios from 'axios';
 
-export const BillForm = () => {
+export const BillForm = ({userId}) => {
 const [amount , setAmount] = useState();
 const [activity , setActivity] = useState();
 
@@ -21,22 +21,26 @@ console.log(e.target.value)
 setActivity(e.target.value);
 }
 
-const addBill = ()=>{
-  const bill = {billAmount:amount , billActivity: activity}
+const addBill =async ()=>{
+  console.log(context)
+
+  const bill = {billAmount:amount , billActivity: activity, createdBy : userId}
   console.log("bill form inside", bill)
-  try{
-  const response = axios.post(process.env.VITE_ADDBILL_URL,{
-    bill
-  });
-  if(response==200){
-    alert("bill successfully added!")
-  }else{
-    alert("some error try again/ check details")
-  }
-  }catch(error){
-  console.log("error in adding bill- server error")
-  }
-context.addBill();
+  context.addBill(bill);
+  // try{
+  // const response =await axios.post(import.meta.env.VITE_ADDBILL_URL,{
+  //   bill
+  // });
+  // if(response.status==200){
+  //   alert("bill successfully added!")
+  //   context.addBill(bill);
+  // }else{
+  //   alert("some error try again/ check details")
+  // }
+  // }catch(error){
+  // console.log("error in adding bill- server error",error)
+  // }
+
 }
 
     const beauty={

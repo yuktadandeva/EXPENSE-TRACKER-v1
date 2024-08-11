@@ -18,8 +18,8 @@ const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 const [rStatus, setStatus] = useState(false);
 let bill;
-const addBill = (bill)=>{
-console.log("add bill in dashboard", bill);
+const addNewBill = (bill)=>{
+
 }
 
 const addInfo = (data)=>{
@@ -185,7 +185,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
-    <BillContext.Provider value={{bill:bill,addBill:addBill}}>
+    <BillContext.Provider value={{bill:bill,addBill:addNewBill}}>
     
     {login?<div className="container" >
       
