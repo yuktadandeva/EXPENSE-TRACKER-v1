@@ -3,8 +3,11 @@ import { BillContext } from './context/bill-context'
 import { FriendList } from './FriendList'
 import Button from '../../../shared/Widgets/Button'
 
-export const Bill = ({bill,activity,share, friendGroup}) => {
+export const Bill = ({share, friendGroup}) => {
 const context = useContext(BillContext);
+
+const billInfo = context.bill;
+console.log("inside view bill",billInfo);
 
 const myStyle={
     height:"30vh", 
@@ -23,12 +26,15 @@ const cen={textAlign:"center",fontSize:"0.8em", paddingTop:"10px"}
     <div>
     <div style={myStyle}>
       <div style={dis}>
-      TOTAL BILL :
-      <div style={cen}>{bill}</div>
+      TOTAL BILL : 
+      <div style={cen}>{billInfo.billAmount}</div>
       </div>
       <div style={dis}>
-    <h3>Description:&nbsp;{activity}</h3>
+    <h3>Description:&nbsp;{billInfo.billActivity}</h3><br />
+
+
     </div>
+    {/* <i>Created by:{billInfo.createdBy}</i> */}
     </div>
     <Button val="share"></Button>
     <div className="friend-list">

@@ -3,7 +3,7 @@ import { Friends } from './Friends'
 
 
 
-export function Profile({billHandled,splitBill,activityHandled,friendList,user,add}) {
+export function Profile({splitBill,friendList,user}) {
 const flex={
     display:"flex",
     justifyContent:"space-around",
@@ -41,7 +41,7 @@ return (
           <h6><i>{user.userId}</i></h6>
         </div>
         <div className="add-bill row">
-         <BillForm billHandled={billHandled} splitBill={splitBill} activityHandled={activityHandled} userId={user._id}></BillForm>
+         <BillForm userId={user._id}></BillForm>
         </div>
         <div className="add-friend">
           <Friends userFriendList={friendList} add={add}></Friends>

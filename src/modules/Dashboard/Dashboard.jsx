@@ -17,9 +17,11 @@ const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 const [rStatus, setStatus] = useState(false);
-let bill;
-const addNewBill = (bill)=>{
 
+
+const addNewBill = (data)=>{
+ setBill(data);
+ console.log("totalBill", totalBill)
 }
 
 const addInfo = (data)=>{
@@ -185,7 +187,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
-    <BillContext.Provider value={{bill:bill,addBill:addNewBill}}>
+    <BillContext.Provider value={{bill:totalBill,addBill:addNewBill}}>
     
     {login?<div className="container" >
       
