@@ -2,9 +2,11 @@ import { Friend } from "./Friend"
 import { BillContext } from "./context/bill-context";
 import { useContext } from "react";
 
-export const FriendList = ({share,friendGroup}) => {
+export const FriendList = ({friendGroup, share}) => {
   
-const Context = useContext(BillContext);
+const context = useContext(BillContext);
+
+
   const border={
     border:"1px solid grey",
     margin:"1px",
@@ -15,8 +17,8 @@ const Context = useContext(BillContext);
   return (
     <div>
         <div className="row" style={border}>
-{/*           
-          {friendGroup.map((friend,key)=><Friend key={friend.id} friend={friend} share={share} />)} */}
+          
+          {friendGroup.map((friend,index)=><Friend key={index} friend={friend} share={share}/>)}
        
         </div>
     </div>

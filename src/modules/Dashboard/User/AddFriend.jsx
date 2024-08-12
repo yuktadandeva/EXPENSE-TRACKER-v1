@@ -8,10 +8,11 @@ export const AddFriend = ({friend}) => {
   const friendtoAdd = {friend};
 
 const addInList = ()=>{
-    console.log(friendtoAdd)
-
-      Context.addInList(friendtoAdd);
+    Context.addInList(friendtoAdd);
   }
+const removeFromList = ()=>{
+  Context.removeFromList(friendtoAdd);
+}
 
   const display={
     display:"flex"
@@ -61,7 +62,7 @@ const addInList = ()=>{
       </div>
       <div style={display}>
       <Button id={friend.userId} fn={addInList} val={'+'}></Button>
-      <Button id={friend.userId}  val={"-"}></Button>
+      <Button id={friend.userId} fn={removeFromList} val={"-"}></Button>
       </div>
       </div>
     

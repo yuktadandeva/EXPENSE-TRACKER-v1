@@ -1,11 +1,18 @@
-import React,{useContext} from 'react'
+import React,{useContext, useState} from 'react'
 import { BillContext } from './context/bill-context'
 import { FriendList } from './FriendList'
 import Button from '../../../shared/Widgets/Button'
 
-export const Bill = ({share, friendGroup}) => {
+export const Bill = () => {
+const [share, setShare] = useState();
 const context = useContext(BillContext);
-const billInfo = context.bill;
+
+ const billInfo = context.bill;
+ const friendGroup= context.friends;
+const calShare = ()=>{
+  const share= (billInfo.billAmount) / (friendGroup.length);
+  setShare((share).toFixed(2));
+}
 const myStyle={
     height:"35vh", 
     backgroundColor:"#131e25", 
@@ -34,10 +41,10 @@ const cen={textAlign:"center",fontSize:"0.8em", paddingTop:"10px"}
     </div>
     {/* <i>Created by:{billInfo.createdBy}</i> */}
     </div>
-    <Button val="share"></Button>
+    <Button val="share" fn={calShare}></Button>
     <div className="friend-list">
     <div className="friends">
-      <FriendList share={share} friendGroup={friendGroup}></FriendList>
+      <FriendList friendGroup={friendGroup} share={share}></FriendList>
      </div>
     </div>
     </div>

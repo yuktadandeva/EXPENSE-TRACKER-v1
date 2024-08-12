@@ -27,23 +27,23 @@ const addBill =async ()=>{
   const bill = {billAmount:amount , billActivity: activity, createdBy : userId}
   console.log("bill form inside", bill)
   context.addBill(bill);
-  // try{
-  // const response =await axios.post(import.meta.env.VITE_ADDBILL_URL,{
-  //   bill
-  // });
-  // if(response.status==200){
-  //   alert("bill successfully added!")
+  try{
+  const response =await axios.post(import.meta.env.VITE_ADDBILL_URL,{
+    bill
+  });
+  if(response.status==200){
+    alert("bill successfully added!")
   
-  //   console.log(response.data.billId);
-  //   bill.billId = response.data.billId;
-  //   console.log(bill)
-  //   context.addBill(bill);
-  // }else{
-  //   alert("some error try again/ check details")
-  // }
-  // }catch(error){
-  // console.log("error in adding bill- server error",error)
-  // }
+    console.log(response.data.billId);
+    bill.billId = response.data.billId;
+    console.log(bill)
+    context.addBill(bill);
+  }else{
+    alert("some error try again/ check details")
+  }
+  }catch(error){
+  console.log("error in adding bill- server error",error)
+  }
 
 }
 

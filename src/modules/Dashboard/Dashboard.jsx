@@ -20,20 +20,19 @@ const [rStatus, setStatus] = useState(false);
 const[friendsBill, setFriendsBill] = useState([]);
 const[friendIDs, setFriendIDs] = useState([]);
 
+//adding bill information
 const addNewBill =async (data)=>{
-
  setBill(data);
  console.log(totalBill)
 
 }
+
 const friendIDsClone = [...friendIDs];
 const friendsClone = [...friendsBill];
 const addInBillList = (friend)=>{
   // console.log("data in dashboard",friend);
   friendIDsClone.push(friend.friend._id);
   setFriendIDs(friendIDsClone);
-
-
   friendsClone.push(friend.friend);
   setFriendsBill(friendsClone);
   
@@ -45,16 +44,47 @@ useEffect(()=>{
   console.log(friendsBill);
 },[friendsBill])
 
+const removeFromList=(friend)=>{
+
+  const updatedFriendIDsClone = friendIDs.filter( element => {
+    return element !== friend.friend._id;
+  });
+  setFriendIDs(updatedFriendIDsClone)
+  console.log("remove from list", friend.friend._id)
+
+  const updatedFriendsBill =friendsBill.filter(element =>{
+    return element !== friend.friend;
+  })
+  setFriendsBill(updatedFriendsBill);
+}
+
 const sendData = ()=>{
   if(!totalBill){
     alert("enter bill details first")
   }else{
-    const data = {billId: totalBill.billId, friendIds:friendIDs}
-    console.log("send data please", data)
-  }
-  
-}
 
+    postData();
+  }
+}
+  const postData= async ()=>{
+    try{
+      const data = {billId: totalBill.billId, friendIds:friendIDs}
+      console.log("send data please", data)
+      const response = await axios.post(import.meta.env.VITE_ADDFRIENDBILL_URL,{
+      data
+     })
+     if(response.status==200){
+      alert("friends added!")
+     }else{
+      alert("cannot add try again")
+     }
+    }catch(error){
+     console.log("error in adding data", error)
+    }
+  }
+ 
+
+//user registration
 const addInfo = (data)=>{
  setRegisInfo(data);
  registerUser(regisInfo)
@@ -126,6 +156,7 @@ const searchUser= async(userName)=>{
     name:userName
   }
  })
+ 
  if(response.status==200){
   setFoundUser(response.data.user);
   console.log("founduser is ", foundUser);
@@ -133,6 +164,9 @@ const searchUser= async(userName)=>{
 alert("not found");
  }
  }catch(error){
+  if(response.status==400){
+    alert("friend already added!");
+   }
  console.log("user not found", error)
  }
 
@@ -218,7 +252,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
-    <BillContext.Provider value={{bill:totalBill,addBill:addNewBill, addInList:addInBillList, sendData: sendData}}>
+    <BillContext.Provider value={{bill:totalBill,friends:friendsBill,addBill:addNewBill, addInList:addInBillList,removeFromList:removeFromList, sendData: sendData}}>
     
     {login?<div className="container" >
       
