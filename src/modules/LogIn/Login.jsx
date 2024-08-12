@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Registration } from '../Registration/Registration';
+import Button from '../../shared/Widgets/Button';
 
 
 export const Login = ({onLogin,rStatus}) => {
@@ -69,7 +70,7 @@ const atag={
        
     </form>
 
-   <button onClick={(e)=>{setRegistration(true)}}>OR register</button>
+   <Button fn={(e)=>{setRegistration(true)}} val={"Register"}></Button>
         
      </div>
      :<Registration toggleRegistration={toggleRegistration} rStatus={rStatus}/>}

@@ -1,11 +1,11 @@
 import React from 'react'
 import './Button.css';
-const Button = ({val,fn,id}) => {
+const Button = ({val,fn,id, type}) => {
 
 
   return (
    
-    <button  className='square-button' id={id} onClick={fn} >{val}</button>
+    <button type={type} className='square-button' id={id} onClick={fn} >{val}</button>
    
   )
 }
