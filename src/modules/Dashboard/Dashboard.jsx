@@ -17,11 +17,33 @@ const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 const [rStatus, setStatus] = useState(false);
+const[friendsBill, setFriendsBill] = useState([]);
 
+const addNewBill =async (data)=>{
 
-const addNewBill = (data)=>{
  setBill(data);
- console.log("totalBill", totalBill)
+ console.log(totalBill)
+
+}
+const friendIds = [];
+const addInBillList = (friend)=>{
+  console.log("data in dashboard",friend);
+  friendIds.push(friend._id);
+
+  const friendsClone = [...friendsBill];
+  friendsClone.push(friend);
+  setFriendsBill(friendsClone);
+  console.log(friendsBill);
+
+  // try{
+  //  const response = await axios.post()
+  // }catch(error){
+
+  // }
+
+}
+const sendData = ()=>{
+  console.log("send data please")
 }
 
 const addInfo = (data)=>{
@@ -187,7 +209,7 @@ return (
     <Header reset={reset} searchUser={searchUser} foundUser={foundUser} user={user} add={addInFriendlist} login={login}></Header>
 
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
-    <BillContext.Provider value={{bill:totalBill,addBill:addNewBill}}>
+    <BillContext.Provider value={{bill:totalBill,addBill:addNewBill, addInList:addInBillList, sendData: sendData}}>
     
     {login?<div className="container" >
       

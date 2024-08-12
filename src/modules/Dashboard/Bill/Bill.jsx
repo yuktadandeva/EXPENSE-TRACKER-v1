@@ -6,11 +6,15 @@ import Button from '../../../shared/Widgets/Button'
 export const Bill = ({share, friendGroup}) => {
 const context = useContext(BillContext);
 
-const billInfo = context.bill;
-console.log("inside view bill",billInfo);
+
+
+
+ const billInfo = context.bill;
+  console.log("inside view bill",billInfo);
+
 
 const myStyle={
-    height:"30vh", 
+    height:"35vh", 
     backgroundColor:"#131e25", 
     color:"white", 
     padding:"70px",
@@ -26,13 +30,14 @@ const cen={textAlign:"center",fontSize:"0.8em", paddingTop:"10px"}
     <div>
     <div style={myStyle}>
       <div style={dis}>
-      TOTAL BILL : 
-      <div style={cen}>{billInfo.billAmount}</div>
+      TOTAL BILL : &nbsp;
+     {billInfo?<div style={cen}>{billInfo.billAmount}</div>:<div/>} 
       </div>
+
       <div style={dis}>
-    <h3>Description:&nbsp;{billInfo.billActivity}</h3><br />
-
-
+      Description:&nbsp;
+      {billInfo?<div>{billInfo.billActivity}</div>:<div/>}
+      <br/>
     </div>
     {/* <i>Created by:{billInfo.createdBy}</i> */}
     </div>

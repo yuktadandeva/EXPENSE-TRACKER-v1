@@ -44,7 +44,7 @@ return (
          <BillForm userId={user._id}></BillForm>
         </div>
         <div className="add-friend">
-          <Friends userFriendList={friendList} add={add}></Friends>
+          <Friends userFriendList={friendList}></Friends>
         </div>
     </div>
   )

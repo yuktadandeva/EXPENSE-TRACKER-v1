@@ -1,13 +1,18 @@
-import React from 'react'
-import { AddFriend } from './AddFriend'
+import React, { useContext } from 'react'
+import { AddFriend } from './AddFriend';
+import Button from '../../../shared/Widgets/Button';
+import { BillContext } from '../Bill/context/bill-context';
 
-export const Friends = ({userFriendList,add}) => {
+export const Friends = ({userFriendList}) => {
+  const context = useContext(BillContext)
   const heading={
     textAlign:"center",
     backgroundColor:"#131e25",
     color:"white"
   }
- 
+const sendData=()=>{
+  context.sendData();
+}
 // friends.forEach((friend)=>{friends}.push(friend));
   return (
     <div>
@@ -16,8 +21,10 @@ export const Friends = ({userFriendList,add}) => {
           <i>your friend list</i>
         </div>
     <div className='row'>
-    {userFriendList.map((friend,key)=> <AddFriend friend={friend} key={friend.userId} add={add}></AddFriend>)}
+    {userFriendList.map((friend,key)=> <AddFriend friend={friend} key={friend.userId} ></AddFriend>)}
     </div>
+
+    <Button fn={sendData} val={"Add friends to bill"}></Button>
     </div>
   )
 }

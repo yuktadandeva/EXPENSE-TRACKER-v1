@@ -2,32 +2,21 @@ import React,{useContext} from 'react'
 import { BillContext } from '../Bill/context/bill-context'
 import Button from '../../../shared/Widgets/Button';
 
-export const AddFriend = ({friend,add}) => {
+export const AddFriend = ({friend}) => {
 
   const Context = useContext(BillContext);
+  const friendtoAdd = {friend};
 
-  const addInList = (friend)=>{
-      Context.addInList({...friend});
+const addInList = ()=>{
+    console.log(friendtoAdd)
+
+      Context.addInList(friendtoAdd);
   }
 
     const myStyle={
       display:"flex",
       paddingLeft:"30px"
 
-    }
-    const squareButton={
-      width: '20px', // Adjust the width and height as needed
-      height: '20px',
-      backgroundColor: '#22313f', // Change the background color as needed
-      color: 'white',
-      border: 'none',
-      borderRadius: '20', // Ensure corners are not rounded
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: "right",
-      cursor: 'pointer',
-      paddingBottom:"25px",
-      paddingTop:"0px"
     }
     const name={
       margin:"2px",
