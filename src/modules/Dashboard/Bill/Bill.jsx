@@ -5,14 +5,7 @@ import Button from '../../../shared/Widgets/Button'
 
 export const Bill = ({share, friendGroup}) => {
 const context = useContext(BillContext);
-
-
-
-
- const billInfo = context.bill;
-  console.log("inside view bill",billInfo);
-
-
+const billInfo = context.bill;
 const myStyle={
     height:"35vh", 
     backgroundColor:"#131e25", 

@@ -46,6 +46,7 @@ const addInList = ()=>{
       </div>
       <p style={name}>{friend.name} &nbsp;</p>|<p style={username}>&nbsp;{friend.userId}</p> 
       <Button id={friend.userId} fn={addInList} val={'+'}></Button>
+      <Button id={friend.userId}  val={"-"}></Button>
     </div>
   )
 }

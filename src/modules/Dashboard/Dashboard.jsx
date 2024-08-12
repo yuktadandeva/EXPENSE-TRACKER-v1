@@ -18,6 +18,7 @@ const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 const [rStatus, setStatus] = useState(false);
 const[friendsBill, setFriendsBill] = useState([]);
+const[friendIDs, setFriendIDs] = useState([]);
 
 const addNewBill =async (data)=>{
 
@@ -25,25 +26,33 @@ const addNewBill =async (data)=>{
  console.log(totalBill)
 
 }
-const friendIds = [];
+const friendIDsClone = [...friendIDs];
+const friendsClone = [...friendsBill];
 const addInBillList = (friend)=>{
-  console.log("data in dashboard",friend);
-  friendIds.push(friend._id);
+  // console.log("data in dashboard",friend);
+  friendIDsClone.push(friend.friend._id);
+  setFriendIDs(friendIDsClone);
 
-  const friendsClone = [...friendsBill];
-  friendsClone.push(friend);
+
+  friendsClone.push(friend.friend);
   setFriendsBill(friendsClone);
-  console.log(friendsBill);
-
-  // try{
-  //  const response = await axios.post()
-  // }catch(error){
-
-  // }
-
+  
 }
+useEffect(()=>{
+  console.log(friendIDs);
+},[friendIDs]);
+useEffect(()=>{
+  console.log(friendsBill);
+},[friendsBill])
+
 const sendData = ()=>{
-  console.log("send data please")
+  if(!totalBill){
+    alert("enter bill details first")
+  }else{
+    const data = {billId: totalBill.billId, friendIds:friendIDs}
+    console.log("send data please", data)
+  }
+  
 }
 
 const addInfo = (data)=>{
