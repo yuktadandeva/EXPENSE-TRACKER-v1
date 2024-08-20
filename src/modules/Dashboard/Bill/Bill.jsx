@@ -8,10 +8,12 @@ export const Bill = ({user}) => {
 const [share, setShare] = useState();
 const context = useContext(BillContext);
 
- const billInfo = context.bill;
- const friendGroup= context.friends;
-const calShare = ()=>{
+const billInfo = context.bill;
+const friendGroup= context.friends;
+console.log("user", {user})
 
+
+const calShare = ()=>{
   const share= (billInfo.billAmount) / (friendGroup.length);
   setShare((share).toFixed(2));
   updateShare();
@@ -62,7 +64,7 @@ const cen={textAlign:"center",fontSize:"0.8em", paddingTop:"10px"}
     </div>
    
     </div>
-    {billInfo?<div><i>Created by:{billInfo.createdBy}</i></div>:<div/>} 
+    {billInfo?<div><i>Created by:{billInfo.createdBy.userId}</i></div>:<div/>} 
     <Button val="share" fn={calShare}></Button>
     <div className="friend-list">
     <div className="friends">

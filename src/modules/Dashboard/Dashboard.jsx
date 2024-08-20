@@ -133,7 +133,7 @@ const onLogin =async (data)=>{
     if(response.status==200){
      setUser(response.data.user);
      setFriendList(response.data.user.friendList);
-     setPendingBills(response.data.user.bills);
+     setPendingBills(response.data.user.userBills);
      setLogin(true);
      return true;
     }
@@ -220,22 +220,23 @@ return (
     <regisContext.Provider value={{regisInfo:regisInfo, addInfo:addInfo}}>
     <BillContext.Provider value={{bill:totalBill,friends:friendsBill,addBill:addNewBill, addInList:addInBillList,removeFromList:removeFromList, sendData: sendData}}>
     
-    {login?<div className="container" >
+    {login ?<div className="container" >
       
-        <div className="row" style={margin}>
+        {user?<div className="row" style={margin}>
             <div className="col-8" >
                 <div className="totalMoney">
-                 <Bill userBills={user.bills}></Bill>
+                <Bill user={user}></Bill>
                 </div>
+
                 <div>
-             {/* {pendingBills.map((bill, index)=>{<PendingBill key={index} bill={bill} user={user}/>})} */}
-             <PendingBill pendingBills={pendingBills}></PendingBill>
+                <PendingBill pendingBills={pendingBills}></PendingBill>
                 </div>
+
             </div>
             <div className="col-4" style={myStyle}>
-                {user?<Profile user={user} friendList={friendList}></Profile>:<p>Loading</p>}
+               <Profile user={user} friendList={friendList}></Profile>
             </div>
-        </div>
+        </div>:<p>loading...</p>}
      
     </div>: <Login onLogin={onLogin} rStatus={rStatus}/>}
 
