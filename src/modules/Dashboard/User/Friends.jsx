@@ -3,7 +3,7 @@ import { AddFriend } from './AddFriend';
 import Button from '../../../shared/Widgets/Button';
 import { BillContext } from '../Bill/context/bill-context';
 
-export const Friends = ({userFriendList}) => {
+export const Friends = ({user,userFriendList}) => {
   const context = useContext(BillContext)
   const heading={
     textAlign:"center",
@@ -15,6 +15,7 @@ export const Friends = ({userFriendList}) => {
     margin:"3px",
     padding:"3px"
   }
+
 const sendData=()=>{
   context.sendData();
 }
@@ -26,10 +27,14 @@ const sendData=()=>{
           <i>your friend list</i>
         </div>
     <div className='row'>
+ 
     {userFriendList.map((friend,index)=> <AddFriend friend={friend} key={index} ></AddFriend>)}
     </div>
 
-    <Button fn={sendData} val={"Add friends to bill"}></Button>
+   
+     <Button fn={sendData} val={"Add friends to bill"}></Button>
+   
+    
     </div>
   )
 }

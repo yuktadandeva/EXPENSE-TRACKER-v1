@@ -1,5 +1,6 @@
 import Header from "../../shared/Components/Header"
 import Footer from "../../shared/Components/Footer"
+
 import { Profile } from "./User/Profile"
 import { Bill } from "./Bill/Bill"
 import { useState, useEffect } from "react"
@@ -7,6 +8,7 @@ import { regisContext } from "./context/registration-context.js"
 import { BillContext } from "./Bill/context/bill-context.js"
 import { Login } from "../LogIn/Login"
 import axios from "axios"
+import { PendingBill } from "./Pendingbill/PendingBill.jsx"
 
 export const Dashboard = () => {
 
@@ -17,8 +19,11 @@ const [login, setLogin]= useState(false);
 const [foundUser, setFoundUser] = useState();
 const [regisInfo, setRegisInfo] = useState({});
 const [rStatus, setStatus] = useState(false);
-const[friendsBill, setFriendsBill] = useState([]);
-const[friendIDs, setFriendIDs] = useState([]);
+const [friendsBill, setFriendsBill] = useState([]);
+const [friendIDs, setFriendIDs] = useState([]);
+const [pendingBills, setPendingBills] = useState([]);
+
+
 
 //adding bill information
 const addNewBill =async (data)=>{
@@ -29,8 +34,10 @@ const addNewBill =async (data)=>{
 
 const friendIDsClone = [...friendIDs];
 const friendsClone = [...friendsBill];
+
+
 const addInBillList = (friend)=>{
-  // console.log("data in dashboard",friend);
+  console.log("data in dashboard",friend);
   friendIDsClone.push(friend.friend._id);
   setFriendIDs(friendIDsClone);
   friendsClone.push(friend.friend);
@@ -62,11 +69,10 @@ const sendData = ()=>{
   if(!totalBill){
     alert("enter bill details first")
   }else{
-
     postData();
   }
 }
-  const postData= async ()=>{
+const postData= async ()=>{
     try{
       const data = {billId: totalBill.billId, friendIds:friendIDs}
       console.log("send data please", data)
@@ -106,12 +112,6 @@ const registerUser = async (info)=>{
  }
 }
 
-const addInList = (friend)=>{
-  const friendsClone = [...friendGroup];
-      friendsClone.push(friend);
-      setGroup(friendsClone);
-}
-
 //handles login
 const reset = ()=>{
   setLogin(false);
@@ -133,6 +133,7 @@ const onLogin =async (data)=>{
     if(response.status==200){
      setUser(response.data.user);
      setFriendList(response.data.user.friendList);
+     setPendingBills(response.data.user.bills);
      setLogin(true);
      return true;
     }
@@ -171,6 +172,8 @@ alert("not found");
  }
 
 }
+
+//adding searched friend in user friend list
 const addInFriendlist = async (friendId)=>{
 try{
 const response = await axios.post(import.meta.env.VITE_ADDFRIEND_URL,{
@@ -185,6 +188,7 @@ if(response.status==200){
 }
 }
 
+//fetching updated friend list after adding a new friend
 const fetchUpdatedFriendlist =async ()=>{
   try{
     const response = await axios.get(import.meta.env.VITE_GETFRIENDLIST_URL,{
@@ -201,44 +205,6 @@ const fetchUpdatedFriendlist =async ()=>{
     }
 }
 
-//bill 
-const findingFriend= (userId)=>{
-  const friend = friendList.find((friend)=> friend.id == userId);
-  console.log('friend', friend)
-  return friend;
-} 
-
-// useEffect(() => {
-//   console.log("Friends in Group:", friendGroup);
-//   console.log("total friends", friendGroup.length);
-// }, [friendGroup]);
-
-const handleAdd =(e)=>{
-  const userId = e.target.id; 
-  console.log(userId)
-  const friend = findingFriend(userId);
-  if (friend) {
-    setGroup((prevFriends) => [...prevFriends, friend]);
-  }else {
-    console.log("User not found");
-  }
-}
-
-//calculation and handling bill details on enter
-
-const handleBill= (e)=>{
- setBill(e.target.value);
-}
-const handleClick=()=>{
-  calculateShare(totalBill);
-}
-const handleActivity=(e)=>{
-  setActivity(e.target.value);
-  console.log(e.target.value)
-}
-const calculateShare=()=>{
-  setShare(parseFloat(totalBill/friendGroup.length).toFixed(2));
-}
 
 // styling css
 
@@ -259,7 +225,11 @@ return (
         <div className="row" style={margin}>
             <div className="col-8" >
                 <div className="totalMoney">
-                 <Bill></Bill>
+                 <Bill userBills={user.bills}></Bill>
+                </div>
+                <div>
+             {/* {pendingBills.map((bill, index)=>{<PendingBill key={index} bill={bill} user={user}/>})} */}
+             <PendingBill pendingBills={pendingBills}></PendingBill>
                 </div>
             </div>
             <div className="col-4" style={myStyle}>

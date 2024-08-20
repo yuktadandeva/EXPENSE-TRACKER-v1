@@ -1,6 +1,6 @@
 import { BillForm } from './BillForm'
 import { Friends } from './Friends'
-
+import Button from '../../../shared/Widgets/Button'
 
 
 export function Profile({splitBill,friendList,user}) {
@@ -44,7 +44,8 @@ return (
          <BillForm userId={user._id}></BillForm>
         </div>
         <div className="add-friend">
-          <Friends userFriendList={friendList}></Friends>
+          
+          <Friends user={user} userFriendList={friendList}></Friends>
         </div>
     </div>
   )
