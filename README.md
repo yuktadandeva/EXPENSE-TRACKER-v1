@@ -1,8 +1,11 @@
-# React + Vite
+#BILL SPLITTING APP
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#features:
+#Registeration
+#login
+#search users
+#add in friendlist
+#creating new bills amount, activity, adding friends to bill, equally share among
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#Technologies used:
+#MERN
