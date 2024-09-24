@@ -1,5 +1,5 @@
 **#BILL SPLITTING APP**
-
+Developed as a final project for Brain Mentors Mern full stack certification. <br>
 features:<br>
 Registeration and login <br>
 search users by username <br>
@@ -15,7 +15,8 @@ Database - MongoDB
   
 LOGIN PAGE <br>
 <img width="400" alt="login" src="https://github.com/user-attachments/assets/1d4e713d-e0ee-4587-829e-bf9ce331507d">  
-
+<br>
+<br>
 REGISTRATION PAGE <br>
 <img width="400" alt="regis" src="https://github.com/user-attachments/assets/4dc11b1c-6353-4aed-b20e-a9deaee5eed2">
 <br>
