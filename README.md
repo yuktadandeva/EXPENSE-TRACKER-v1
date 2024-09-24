@@ -15,16 +15,13 @@ Database - MongoDB
   
 LOGIN PAGE <br>
 <img width="400" alt="login" src="https://github.com/user-attachments/assets/1d4e713d-e0ee-4587-829e-bf9ce331507d">  
-<br>
-<br>
+
 REGISTRATION PAGE <br>
 <img width="400" alt="regis" src="https://github.com/user-attachments/assets/4dc11b1c-6353-4aed-b20e-a9deaee5eed2">
 <br>
 <br>
 USER DAHSBOARD <br>
 <img width="400" alt="user dashboard" src="https://github.com/user-attachments/assets/b43a8863-c96a-4d64-9ea1-a56476ec2e72">  
-<br>
-<br>
 
 SEARCH FUNCTIONALITY <br>
 <img width="400" alt="search" src="https://github.com/user-attachments/assets/bbe2dcbe-7760-480c-b40d-e08f84e87fc2">  
