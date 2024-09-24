@@ -11,9 +11,10 @@ Frontend - React.js, Custom CSS + Bootstrap for layout
 Backend - Node.js(Express) + Axios + Mongoose  
 Database - MongoDB 
 
-![App Screenshot](images/screenshot.png)
+
   
 
+<img width="324" alt="login" src="https://github.com/user-attachments/assets/1d4e713d-e0ee-4587-829e-bf9ce331507d">
 
 
 
