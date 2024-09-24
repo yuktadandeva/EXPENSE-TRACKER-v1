@@ -11,6 +11,7 @@ Frontend - React.js, Custom CSS + Bootstrap for layout
 Backend - Node.js(Express) + Axios + Mongoose  
 Database - MongoDB 
 
+![App Screenshot](images/screenshot.png)
   
 
 
