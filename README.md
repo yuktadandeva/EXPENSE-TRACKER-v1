@@ -1,6 +1,6 @@
-#BILL SPLITTING APP
+**#BILL SPLITTING APP**
 
-features:
+features:<br>
 Registeration and login <br>
 search users by username <br>
 add friends in yout friendlist <br>
@@ -10,6 +10,7 @@ Technologies used: MERN Stack
 Frontend - React.js, Custom CSS + Bootstrap for layout  
 Backend - Node.js(Express) + Axios + Mongoose  
 Database - MongoDB  
+[Watch Demo Video](Videos/project1)
 
 
 
